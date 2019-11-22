@@ -9,7 +9,7 @@ pipeline {
     stage('build') {
       steps {
       sh 'mvn clean package'
-      junit '/var/lib/jenkins/workspace/petclinic_pipeline/target/surefire-reports/TEST-*.xml'
+      junit '**/target/surefire-reports/TEST-*.xml'
       }
     }
   }
