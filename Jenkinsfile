@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage ('Checkout') {
       steps {
-        git 'https://github.com/effectivejenkins/spring-petclinic'
+        git 'https://github.com/hooryash/vicks-jks.git'
       }
     }
     stage('build') {
