@@ -1,13 +1,13 @@
 pipeline {
-
+  agent { 'none'}
   stages {
-    stage ('Checkout') {
+      stage ('Checkout') {
       steps {
         git 'https://github.com/hooryash/vicks-jks.git'
       }
     }
     stage('build') {
-      agent { docker 'maven:3.5-alpine'}  
+      agent { docker 'maven:3.5-alpine'}
       steps {
       sh 'mvn clean package'
       junit '**/target/surefire-reports/TEST-*.xml'
