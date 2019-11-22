@@ -1,5 +1,5 @@
 pipeline {
-  agent { docker 'maven:3.5-alpine'}
+
   stages {
     stage ('Checkout') {
       steps {
@@ -7,6 +7,7 @@ pipeline {
       }
     }
     stage('build') {
+      agent { docker 'maven:3.5-alpine'}  
       steps {
       sh 'mvn clean package'
       junit '**/target/surefire-reports/TEST-*.xml'
@@ -16,7 +17,8 @@ pipeline {
     stage('Deploy'){
      steps {
      input 'Do you approve the deployment?'
-     echo 'Deploying....'
+     sh 'scp target/*.jar jenkins@localhost:/opt/pet/'
+     sh "ssh jenkins@localhost 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
      }
     }
   }
